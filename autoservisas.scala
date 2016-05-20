@@ -3,106 +3,48 @@ package examples
 import org.specs2.mutable._
 
 /*
-  Simplest versions of the canonical Money Transfer example
-
-  NOTE: If a role method has the same signature as an instance method of the original
-  Data object, the role method will take precedence/override the instance method. This
-  applies to all versions below.
+  Autoserviso pavyzdys kursiniam darbui
+  
+  Džiugas Vyšniauskas
 */
 
-class MoneyTransfer1 extends Specification {
+class Autoservisas extends Specification {
   
-  case class Automobilis(numeris: String, markė: String, pagaminimoData: DateTime, statusas: String) {  }
-  
-
+  case class Automobilis(numeris: String, markė: String, pagaminimoData: DateTime, statusas: String, paskutinėsPeržiūrosData: DateTime) {  }
+  case class Mechanikas(vardas: String, pavardė: String, telNr: String, darbai: ListBuffer[Automobilis]) {}
 
   "With various role syntaxes" >> {
-
-    // Using role name as reference to the Role Player - `source.decreaseBalance(amount)`
-
+   
     @context
-    case class MoneyTransfer(source: Account, destination: Account, amount: Int) {
+    case class AtliktiDarbą(mechanikas: Mechanikas) {
 
-      source.withdraw
+      // Rolės
+      private val meistras  = mechanikas
+	  private val automobilis = mechanikas.darbai.take(1)       
 
-      role source {
-        def withdraw {
-          source.decreaseBalance(amount)
-          destination.deposit
+      role meistras {
+        def taisytiAutomobilį {
+          automobilis.atsinaujinti
+		  self.darbai = self.darbai.drop(1)
         }
       }
 
-      role destination {
-        def deposit {
-          destination.increaseBalance(amount)
+      role automobilis {
+        def atsinaujinti {
+          automobilis.paskutinėsPeržiūrosData = DateTime.Now
+		  automobilis.statusas = "Tvarkingas"
         }
       }
     }
 
-
-    // Using `self` as reference to the Role Player - `self.decreaseBalance(amount)`
-
-    @context
-    case class MoneyTransfer_self(source: Account, destination: Account, amount: Int) {
-
-      source.withdraw
-
-      role source {
-        def withdraw {
-          self.decreaseBalance(amount)
-          destination.deposit
-        }
-      }
-
-      role destination {
-        def deposit {
-          self.increaseBalance(amount)
-        }
-      }
-    }
-
-
-    /*
-      Using `this` as reference to the Role Player - `this.decreaseBalance(amount)`
-      ATTENTION:
-      Using `this` inside a role definition will reference the role-playing object (and not the Context object)!
-    */
-    @context
-    case class MoneyTransfer_this(source: Account, destination: Account, amount: Int) {
-
-      source.withdraw
-
-      role source {
-        def withdraw {
-          this.decreaseBalance(amount)
-          destination.deposit
-        }
-      }
-
-      role destination {
-        def deposit {
-          this.increaseBalance(amount)
-        }
-      }
-    }
 
     // Test
-    val salary = Account("Salary", 3000)
-    val budget = Account("Budget", 1000)
+    val automibilis = Automobilis("III222", "Mazda 5", DateTime.parse("2013-05-05"), "Sugadintas", DateTime.parse("2013-05-05"))
+    val mechanikas = Mechanikas("Jonas", "Jonaitis", "8699999999", new ListBuffer(automobilis))
 
-    // Using role name
-    MoneyTransfer(salary, budget, 700)
-    salary.balance === 3000 - 700
-    budget.balance === 1000 + 700
-
-    // Using `self`
-    MoneyTransfer_self(salary, budget, 100)
-    salary.balance === 2300 - 100
-    budget.balance === 1700 + 100
-
-    // Using `this`
-    MoneyTransfer_this(salary, budget, 50)
-    salary.balance === 2200 - 50
-    budget.balance === 1800 + 50
+	AtliktiDarbą(mechanikas)
+	automobilis.statusas === "Tvarkingas"
+	mechanikas.darbai.length === 0
+		
   }
 }
