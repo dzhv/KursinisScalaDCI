@@ -32,8 +32,8 @@ class Autoservisas extends Specification {
 
       role automobilis {
         def atsinaujinti {
-          automobilis.paskutinėsPeržiūrosData = DateTime.Now
-          automobilis.statusas = "Tvarkingas"
+          self.paskutinėsPeržiūrosData = DateTime.Now
+          self.statusas = "Tvarkingas"
         }
       }
     }
