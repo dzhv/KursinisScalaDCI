@@ -20,7 +20,8 @@ class Autoservisas extends Specification {
 
       // Rolės
       private val meistras  = mechanikas
-	  private val automobilis = mechanikas.darbai.take(1)       
+	  private val automobilis = mechanikas.darbai.take(1) 
+      
 
       role meistras {
         def taisytiAutomobilį {
