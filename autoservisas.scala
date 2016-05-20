@@ -1,4 +1,4 @@
-package scaladci
+﻿package scaladci
 package examples
 import org.specs2.mutable._
 
@@ -20,32 +20,33 @@ class Autoservisas extends Specification {
 
       // Rolės
       private val meistras  = mechanikas
-	  private val automobilis = mechanikas.darbai.take(1) 
+      private val automobilis = mechanikas.darbai.take(1) 
       
 
       role meistras {
         def taisytiAutomobilį {
           automobilis.atsinaujinti
-		  self.darbai = self.darbai.drop(1)
+	  self.darbai = self.darbai.drop(1)
         }
       }
 
       role automobilis {
         def atsinaujinti {
           automobilis.paskutinėsPeržiūrosData = DateTime.Now
-		  automobilis.statusas = "Tvarkingas"
+          automobilis.statusas = "Tvarkingas"
         }
       }
     }
 
 
     // Test
+
     val automibilis = Automobilis("III222", "Mazda 5", DateTime.parse("2013-05-05"), "Sugadintas", DateTime.parse("2013-05-05"))
     val mechanikas = Mechanikas("Jonas", "Jonaitis", "8699999999", new ListBuffer(automobilis))
 
-	AtliktiDarbą(mechanikas)
-	automobilis.statusas === "Tvarkingas"
-	mechanikas.darbai.length === 0
+    AtliktiDarbą(mechanikas)
+    automobilis.statusas === "Tvarkingas"
+    mechanikas.darbai.length === 0
 		
   }
 }
