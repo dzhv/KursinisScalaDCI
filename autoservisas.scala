@@ -24,8 +24,8 @@ class Autoservisas extends Specification {
 
     role meistras {
       def taisytiAutomobilį {
-        automobilis.atsinaujinti
-	    self.darbai = self.darbai.drop(1)
+	automobilis.atsinaujinti
+	self.darbai = self.darbai.drop(1)
       }
     }
 
