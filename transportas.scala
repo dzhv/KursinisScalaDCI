@@ -8,7 +8,7 @@ package examples
 
 class Transportas extends Specification {
   
-  case class TransportoPriemonė(tipas: String, kilometražas: Double, kelionėsKaina: Double) {  }
+  case class TransportoPriemonė(tipas: String, kilometražas: Double, kelionėsKaina: Double) {}
   case class Vairuotojas(vardas: String, pavardė: String, pinigai: Double, stažas: Double) {}
   case class Keleivis(vardas: String, pavardė: String, pinigai: Double, bilietai: Int) {
     def pasižymėtiBilietą() { 
@@ -53,6 +53,7 @@ class Transportas extends Specification {
       }	  
     }
 
+	autobusas.važiuoti
   }
   
   @context
@@ -85,6 +86,7 @@ class Transportas extends Specification {
       }	  
     }
 	
+	taxi.važiuoti
   }
 
   // Test    
