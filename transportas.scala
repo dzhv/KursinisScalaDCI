@@ -86,7 +86,7 @@ class Transportas extends Specification {
       }	  
     }
 	
-	taxi.važiuoti
+    taxi.važiuoti
   }
 
   // Test    
