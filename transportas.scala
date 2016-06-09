@@ -1,4 +1,4 @@
-package scaladci
+﻿package scaladci
 package examples
 
 /*
@@ -11,11 +11,11 @@ class Transportas extends Specification {
   case class TransportoPriemonė(tipas: String, kilometražas: Double, kelionėsKaina: Double) {  }
   case class Vairuotojas(vardas: String, pavardė: String, pinigai: Double, stažas: Double) {}
   case class Keleivis(vardas: String, pavardė: String, pinigai: Double, bilietai: Int) {
-	def pasižymėtiBilietą() { 
-	  if (bilietai > 0 ) {
-	    bilietai -= 1;
-	  }
-	}
+    def pasižymėtiBilietą() { 
+      if (bilietai > 0 ) {
+        bilietai -= 1;
+      }
+    }
   }
 
    
@@ -26,13 +26,13 @@ class Transportas extends Specification {
     // Rolės    
     private val autobusoVairuotojas = vairuotojas
     private val autobusoKeleivis = keleivis  
-	private val autobusas  = transportoPriemonė
+    private val autobusas  = transportoPriemonė
 
-	role autobusas {
+    role autobusas {
       def važiuoti {
         self.kilometražas += atstumas
         vairuotojas.vairuoti
-		autobusoKeleivis.važiuoti
+	autobusoKeleivis.važiuoti
       }
     }
 	
@@ -42,16 +42,16 @@ class Transportas extends Specification {
       }
     }    
 	
-	role autobuseKeleivis {
-	  def važiuoti {
-	    if (self.bilietai > 0) {
-	      self.pasižymėtiBilietą()
-		} else {			// sumokėti už bilietą vairuotojui
-		  self.pinigai -= autobusas.kelionėsKaina
-		  autobusoVairuotojas.pinigai += autobusas.kelionėsKaina
-		}		
+    role autobuseKeleivis {
+      def važiuoti {
+        if (self.bilietai > 0) {
+          self.pasižymėtiBilietą()
+        } else {			// sumokėti už bilietą vairuotojui
+          self.pinigai -= autobusas.kelionėsKaina
+            autobusoVairuotojas.pinigai += autobusas.kelionėsKaina
+        }		
       }	  
-	}
+    }
 
   }
   
@@ -62,13 +62,13 @@ class Transportas extends Specification {
     // Rolės    
     private val taxiVairuotojas = vairuotojas
     private val taxiKeleivis = keleivis  
-	private val taxi  = transportoPriemonė
+    private val taxi  = transportoPriemonė
 		
-	role taxi {
+    role taxi {
       def važiuoti {
         self.kilometražas += atstumas
         vairuotojas.vairuoti
-		autobusoKeleivis.važiuoti
+        autobusoKeleivis.važiuoti
       }
     }
 	
@@ -78,12 +78,12 @@ class Transportas extends Specification {
       }
     }    
 	
-	role taxiKeleivis {
-	  def važiuoti {
-	    self.pinigai -= taxi.kelionėsKaina * atstumas
-		taxiVairuotojas.pinigai += taxi.kelionėsKaina * atstumas
+    role taxiKeleivis {
+      def važiuoti {
+        self.pinigai -= taxi.kelionėsKaina * atstumas
+        taxiVairuotojas.pinigai += taxi.kelionėsKaina * atstumas
       }	  
-	}
+    }
 	
   }
 
