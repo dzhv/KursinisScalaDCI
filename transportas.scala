@@ -32,16 +32,14 @@ class Transportas extends Specification {
       def važiuoti {
         self.kilometražas += atstumas
         vairuotojas.vairuoti
-	autobusoKeleivis.važiuoti
+        autobusoKeleivis.važiuoti
       }
-    }
-	
+    }	
     role autobusoVairuotojas {
       def vairuoti {	
-	self.stažas += atstumas
+        self.stažas += atstumas
       }
-    }    
-	
+    }    	
     role autobuseKeleivis {
       def važiuoti {
         if (self.bilietai > 0) {
@@ -71,14 +69,12 @@ class Transportas extends Specification {
         vairuotojas.vairuoti
         autobusoKeleivis.važiuoti
       }
-    }
-	
+    }	
     role taxiVairuotojas{
       def vairuoti {	
 	self.stažas += atstumas	
       }
-    }    
-	
+    }    	
     role taxiKeleivis {
       def važiuoti {
         self.pinigai -= taxi.kelionėsKaina * atstumas
