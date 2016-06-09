@@ -53,7 +53,7 @@ class Transportas extends Specification {
       }	  
     }
 
-	autobusas.važiuoti
+    autobusas.važiuoti
   }
   
   @context
