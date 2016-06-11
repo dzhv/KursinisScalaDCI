@@ -40,7 +40,7 @@ class Transportas extends Specification {
         self.stažas += atstumas
       }
     }    	
-    role autobuseKeleivis {
+    role autobusoKeleivis {
       def važiuoti {
         if (self.bilietai > 0) {
           self.pasižymėtiBilietą()
