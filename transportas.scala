@@ -74,7 +74,8 @@ class Transportas extends Specification {
       def važiuoti {        
         self.kilometražas += atstumas
       }
-    }	
+    }
+    dviratininkas.pasiimtiDviratį	
   }
   
   // Test    
