@@ -55,7 +55,8 @@ class Transportas extends Specification {
   }   
   
   @context
-  case class VažiuotiDviračiu(transportoPriemonė: TransportoPriemonė, keleivis: Keleivis, atstumas: Double) {    
+  case class VažiuotiDviračiu(transportoPriemonė: TransportoPriemonė, 
+    keleivis: Keleivis, atstumas: Double) {    
     // Rolės        
     private val dviratininkas = keleivis  
     private val dviratis  = transportoPriemonė
