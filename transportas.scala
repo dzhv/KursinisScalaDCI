@@ -64,11 +64,8 @@ class Transportas extends Specification {
     role dviratininkas{
       def pasiimtiDviratį{
         self.pinigai -= dviratis.kelionėsKaina
-        self.važiuoti
-      }	  
-      def važiuoti {
         dviratis.važiuoti
-      }	  
+      }	        
     }	
     role dviratis {
       def važiuoti {        
